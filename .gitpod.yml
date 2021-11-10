@@ -1,5 +1,5 @@
 image: gitpod/workspace-full
-checkoutLocation: gitpod-k3s
+checkoutLocation: foodex2sca-frontend
 tasks:
   - name: prepare k3s
     command: |
