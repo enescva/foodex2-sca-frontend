@@ -1,4 +1,5 @@
-image: gitpod/workspace-base
+image:
+  file: .gitpod.Dockerfile
 checkoutLocation: foodex2sca-frontend
 tasks:
   - name: prepare k3s
