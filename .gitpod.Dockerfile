@@ -42,6 +42,13 @@ RUN curl -o /tmp/dive.deb -fsSL https://github.com/wagoodman/dive/releases/downl
     && apt install /tmp/dive.deb \
     && rm /tmp/dive.deb
 
+
+### Prologue (built across all layers) ###
+LABEL dazzle/layer=dazzle-prologue
+LABEL dazzle/test=tests/prologue.yaml
+USER root
+RUN curl -o /usr/bin/dazzle-util -fsSL https://github.com/csweichel/dazzle/releases/download/v0.0.3/dazzle-util_0.0.3_Linux_x86_64 \
+    && chmod +x /usr/bin/dazzle-util
 # merge dpkg status files
 RUN cp /var/lib/dpkg/status /tmp/dpkg-status \
     && for i in $(ls /var/lib/apt/dazzle-marks/*.status); do /usr/bin/dazzle-util debian dpkg-status-merge /tmp/dpkg-status $i > /tmp/dpkg-status; done \
