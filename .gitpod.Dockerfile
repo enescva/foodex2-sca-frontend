@@ -59,7 +59,7 @@ ENV PATH=$PATH:/usr/games
 # merge GPG keys for trusted APT repositories
 RUN for i in $(ls /var/lib/apt/dazzle-marks/*.gpg); do apt-key add "$i"; done
 # copy tests to enable the self-test of this image
-COPY tests /var/lib/dazzle/tests
+# COPY tests /var/lib/dazzle/tests
 
 # share env see https://github.com/gitpod-io/workspace-images/issues/472
 RUN echo "PATH="${PATH}"" | sudo tee /etc/environment
