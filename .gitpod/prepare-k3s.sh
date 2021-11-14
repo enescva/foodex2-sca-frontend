@@ -38,7 +38,7 @@ waitssh
 echo "✅ ssh server available"
 
 #curl https://releases.rancher.com/install-docker/19.03.sh | sh
-./ssh.sh "curl -sfL https://get.k3s.io | sh -  
+./ssh.sh "curl -sfL https://get.k3s.io | sh -"
 #-s - --docker"
 
 mkdir -p ~/.kube
