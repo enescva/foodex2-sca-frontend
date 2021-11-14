@@ -8,9 +8,10 @@ sudo chmod +x /usr/bin/kubectl
 .gitpod/prepare-k3s.sh
 
 # create docker image
-docker build -t foodex2sca_front . 
-docker save foodex2sca_front -o $HOME/images/foodex2sca_front.tar
-rsync -v foodex2sca_front.tar remote:/home/ubuntu/foodex2sca_front.tar
+docker build -t foodex2sca:front . 
+docker save foodex2sca:front -o $HOME/images/foodex2sca-front.tar
+rsync -v $HOME/images/foodex2sca-front.tar remote:/home/ubuntu/foodex2sca-front.tar
+sudo k3s ctr images import /home/ubuntu/foodex2sca-front.tar
 
 # launch service
 k3d create -v $HOME/images:/var/lib/rancher/k3s/agent/images
