@@ -14,5 +14,5 @@ docker save foodex2sca:front -o $HOME/images/foodex2sca-front.tar
 #sudo k3s ctr images import /home/ubuntu/foodex2sca-front.tar
 
 # launch service
-k3d create -v $HOME/images:/var/lib/rancher/k3s/agent/images
+#k3d create -v $HOME/images:/var/lib/rancher/k3s/agent/images
 kubectl create -f ./manifests/deployment.local.yml
