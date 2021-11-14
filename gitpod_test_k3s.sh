@@ -10,6 +10,8 @@ sudo chmod +x /usr/bin/kubectl
 # create docker image
 docker build -t foodex2sca_front . 
 docker save foodex2sca_front -o $HOME/images/foodex2sca_front.tar
+rsync -v foodex2sca_front.tar remote:/home/ubuntu/foodex2sca_front.tar
+
 # launch service
 k3d create -v $HOME/images:/var/lib/rancher/k3s/agent/images
 kubectl create -f ./manifests/deployment.local.yml
