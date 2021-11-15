@@ -15,10 +15,11 @@ mkdir $HOME/images
 docker save foodex2sca:front -o $HOME/images/foodex2sca-front.tar
 #rsync -v $HOME/images/foodex2sca-front.tar remote:/home/ubuntu/foodex2sca-front.tar
 .gitpod/scp.sh $HOME/images/foodex2sca-front.tar root@127.0.0.1:/home/foodex2sca-front.tar
-.gitpod/scp.sh "sudo k3s ctr images import /home/foodex2sca-front.tar"
+.gitpod/ssh.sh "sudo k3s ctr images import /home/foodex2sca-front.tar"
 
 # launch service
 kubectl create -f ./manifests/deployment.local.yml
 kubectl get pods
 POD=$(kubectl get pods -o=name |  sed "s/^.\{4\}//" | grep ^o )
-kubectl port-forward $POD 8081:8081
+kubectl port-forward $POD 8081:8081 &
+gp await-port 8081 && echo "k3s pod running..." && gp preview $(gp url 8081)
