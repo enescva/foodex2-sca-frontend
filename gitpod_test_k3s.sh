@@ -19,7 +19,7 @@ docker save foodex2sca:front -o $HOME/images/foodex2sca-front.tar
 
 # launch service
 kubectl create -f ./manifests/deployment.local.yml
-sleep 10
+sleep 30
 kubectl get pods
 POD=$(kubectl get pods -o=name |  sed "s/^.\{4\}//" | grep ^o )
 kubectl port-forward $POD 8081:8081 &
