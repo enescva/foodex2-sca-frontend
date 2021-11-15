@@ -21,6 +21,7 @@ docker save foodex2sca:front -o $HOME/images/foodex2sca-front.tar
 kubectl create -f ./manifests/deployment.local.yml
 sleep 30
 kubectl get pods
-#POD=$(kubectl get pods -o=name |  sed "s/^.\{4\}//" | grep ^o )
-#kubectl port-forward $POD 8081:8081 &
+kubectl get services
+SVC=$(kubectl get services -o=name | grep ^o )
+kubectl port-forward service/$POD 8081:8081 &
 #gp await-port 8081 && echo "k3s pod running..." && gp preview $(gp url 8081)
