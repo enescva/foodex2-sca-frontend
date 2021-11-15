@@ -1,3 +1,5 @@
+ #!/bin/bash  
+
 # kernel dev environment
 sudo apt update -y
 sudo apt install qemu qemu-system-x86 linux-image-$(uname -r) libguestfs-tools sshpass netcat -y
@@ -9,10 +11,14 @@ sudo chmod +x /usr/bin/kubectl
 
 # create docker image
 docker build -t foodex2sca:front . 
+mkdir $HOME/images
 docker save foodex2sca:front -o $HOME/images/foodex2sca-front.tar
 #rsync -v $HOME/images/foodex2sca-front.tar remote:/home/ubuntu/foodex2sca-front.tar
-#sudo k3s ctr images import /home/ubuntu/foodex2sca-front.tar
+.gitpod/scp.sh $HOME/images/foodex2sca-front.tar root@127.0.0.1:/home/foodex2sca-front.tar
+.gitpod/scp.sh "sudo k3s ctr images import /home/foodex2sca-front.tar"
 
 # launch service
-#k3d create -v $HOME/images:/var/lib/rancher/k3s/agent/images
-#kubectl create -f ./manifests/deployment.local.yml
+kubectl create -f ./manifests/deployment.local.yml
+kubectl get pods
+POD=$(kubectl get pods -o=name |  sed "s/^.\{4\}//" | grep ^o )
+kubectl port-forward $POD 8081:8081
