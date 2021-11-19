@@ -14,10 +14,11 @@ sudo chmod +x /usr/bin/kubectl
 
 # create docker image
 docker build -t foodex2sca:front . 
-mkdir $HOME/images
-docker save foodex2sca:front -o $HOME/images/foodex2sca-front.tar
-#rsync -v $HOME/images/foodex2sca-front.tar remote:/home/ubuntu/foodex2sca-front.tar
-.gitpod/scp.sh $HOME/images/foodex2sca-front.tar root@127.0.0.1:/home/foodex2sca-front.tar
+mkdir .images
+# save docker image
+docker save foodex2sca:front -o .images/foodex2sca-front.tar
+# copy tar image into VM
+.gitpod/scp.sh .images/foodex2sca-front.tar root@127.0.0.1:/home/foodex2sca-front.tar
 .gitpod/ssh.sh "sudo k3s ctr images import /home/foodex2sca-front.tar"
 
 # launch service

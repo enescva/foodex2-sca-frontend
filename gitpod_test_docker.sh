@@ -1,3 +1,4 @@
+#!/bin/bash  
 docker build -t openefsa/sca-frontend:1.6 .
 docker image ls
 docker run -d --rm -p 8081:8081 --name test-scafe openefsa/sca-frontend:1.6
