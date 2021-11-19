@@ -26,6 +26,6 @@ kubectl create -f ./manifests/deployment.local.yml
 sleep 30
 kubectl get pods
 kubectl get services
-SVC=$(kubectl get services -o=name | grep ^o )
-kubectl port-forward service/$SVC 5432:8081 &
+SVC=$(kubectl get services -o=name | grep ^service/o )
+kubectl port-forward $SVC 5432:8081 &
 gp await-port 5432 && echo "k3s pod running..." && gp preview $(gp url 5432)
