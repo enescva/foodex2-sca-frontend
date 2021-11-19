@@ -1,4 +1,4 @@
- #!/bin/bash  
+#!/bin/bash  
 mkdir .gitpod
 curl -L https://api.github.com/repos/fntlnz/gitpod-k3s/tarball | tar -xzC .gitpod --wildcards "*/.gitpod/*.sh" --strip-components=2
 
