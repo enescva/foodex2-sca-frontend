@@ -1,8 +1,7 @@
  #!/bin/bash  
 mkdir .gitpod
-cd .gitpod
-curl -L https://api.github.com/repos/fntlnz/gitpod-k3s/tarball | tar xz --wildcards "*/.gitpod/*.sh" --strip-components=2
-cd ..
+curl -L https://api.github.com/repos/fntlnz/gitpod-k3s/tarball | tar -xzC .gitpod --wildcards "*/.gitpod/*.sh" --strip-components=2
+
 
 # kernel dev environment
 sudo apt update -y
